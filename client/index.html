@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script>
+        System.import('./client/main');
+    </script>
+
+    <!--<link rel="stylesheet" href="../build.css">-->
+    <!--<script src="../build.js"></script>-->
+</head>
+<body ng-controller="MainCtrl" style="display: none;">
+<md-tabs md-selected="selectedTab">
+    <md-tab label="Menu">
+        <ng-include src="'menu/menu.html'" ng-controller="MenuCtrl as ctrl" id="menu" md-swipe-left="nextTab()"
+                    md-swipe-right="previousTab()"></ng-include>
+    </md-tab>
+    <md-tab label="Produkty">
+        <md-content class="md-whiteframe-z1 md-default-theme" md-swipe-left="nextTab()" md-swipe-right="previousTab()">
+            <md-list>
+                <md-item ng-repeat="food in foods">
+                    <md-item-content>
+                        <div class="md-tile-content" layout="row" layout-align="start center">
+                            <div flex="50" flex-sm="50">{{food.name}}</div>
+                            <div flex="45" flex-sm="50" layout="column">
+                                <div>
+                                    <span>
+                                        <strong>B:</strong> {{food.proteins}}
+                                    </span>
+                                    <span>
+                                        <strong>W:</strong> {{food.carbs}}
+                                    </span>
+                                    <span>
+                                        <strong>T:</strong> {{food.fat}}
+                                    </span>
+                                </div>
+                                <span>
+                                    <strong>kcal:</strong> {{food.kcal}}
+                                </span>
+                            </div>
+                            <i flex="5" class="fa fa-times"
+                               ng-click="deleteFood(food)"
+                               style="cursor: pointer;"></i>
+                        </div>
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+    <md-tab label="Nowy">
+        <form name="form" layout="column" ng-submit="save();" md-swipe-left="nextTab()" md-swipe-right="previousTab()">
+            <md-content>
+                <md-input-container>
+                    <label>Nazwa</label>
+                    <input ng-model="newFood.name" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Białko</label>
+                    <input type="number"
+                           ng-model="newFood.proteins" min="0" step="any"
+                           ng-change="newFood.calcKcal()" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Węglowodany</label>
+                    <input type="number"
+                           ng-model="newFood.carbs" min="0" step="any"
+                           ng-change="newFood.calcKcal()" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Tłuszcz</label>
+                    <input type="number"
+                           ng-model="newFood.fat" min="0" step="any"
+                           ng-change="newFood.calcKcal()" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Kalorie</label>
+                    <input type="number" min="0" step="any"
+                           ng-model="newFood.kcal" required>
+                </md-input-container>
+                <md-switch ng-model="hasUnits">
+                    Jednostki
+                </md-switch>
+                <md-input-container ng-show="hasUnits">
+                    <label>Jednostka</label>
+                    <input ng-model="newFood.unit">
+                </md-input-container>
+                <md-input-container ng-show="hasUnits">
+                    <label>Waga jednostki</label>
+                    <input ng-model="newFood.unitWeight">
+                </md-input-container>
+            </md-content>
+            <md-button class="md-primary md-raised"
+                       type="submit"
+                       ng-click="form.submit()"
+                       ng-disabled="!form.$valid">
+                Dodaj
+            </md-button>
+        </form>
+    </md-tab>
+</md-tabs>
+</body>
+</html>
