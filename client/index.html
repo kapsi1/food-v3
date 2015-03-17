@@ -13,7 +13,7 @@
 <body ng-controller="MainCtrl" style="display: none;">
 <md-tabs md-selected="selectedTab">
     <md-tab label="Menu">
-        <ng-include src="'menu/menu.html'" ng-controller="MenuCtrl as ctrl" id="menu" md-swipe-left="nextTab()"
+        <ng-include src="'menu/menu.html'" ng-controller="MenuCtrl" id="menu" md-swipe-left="nextTab()"
                     md-swipe-right="previousTab()"></ng-include>
     </md-tab>
     <md-tab label="Produkty">

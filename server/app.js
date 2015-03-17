@@ -1,13 +1,15 @@
 var fs = require('fs');
 var express = require('express');
 var compression = require('compression');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 var port = process.env.PORT || 3000;
 var db = 'mongodb://localhost/fooddiary-dev';
 
 app.use(compression());
-require('./server/routes')(app);
+app.use(bodyParser.json());
+require('./routes')(app);
 
 // Connect to mongodb
 var connect = function () {

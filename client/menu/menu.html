@@ -14,29 +14,22 @@
     </md-switch>
 </md-toolbar>
 <md-autocomplete
-        md-selected-item="menuCtrl.searchFood"
-        md-search-text="menuCtrl.searchText"
+        md-selected-item="searchFood.food"
+        md-search-text="searchText"
         md-items="food in foods"
         md-item-text="food.name"
         placeholder="Nowy posiłek">
-    <span md-highlight-text="menuCtrl.searchText" ng-click="menuCtrl.addEaten(food)">
+    <span md-highlight-text="searchText">
         {{food.name}}
     </span>
 </md-autocomplete>
-sf:{{menuCtrl.searchFood}}
-<br>
-st:{{menuCtrl.searchText}}
-<br>
-foods: {{foods}}
-<br>
-eaten:{{menuCtrl.eaten}}
 <md-list id="eaten-list"
          class="md-whiteframe-z1 md-default-theme"
-         ng-show="menuCtrl.eaten.length">
-    <md-item ng-repeat="food in menuCtrl.eaten">
+         ng-show="eaten.length">
+    <md-item ng-repeat="food in eaten">
         <md-item-content>
             <div class="md-tile-content" layout="row" layout-align="start center">
-                <div>{{food.name}}</div>
+                <div flex="50">{{food.name}}</div>
 
                 <div layout="row">
                     <md-input-container>
@@ -56,7 +49,7 @@ eaten:{{menuCtrl.eaten}}
                         <label>{{food.unit}}</label>
                     </md-input-container>
                 </div>
-                <div>
+                <div flex="30">
                     <span>
                         <strong>B:</strong> {{food._weight_proteins | round}}
                     </span>
