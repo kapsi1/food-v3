@@ -9,8 +9,11 @@
         <i class="fa fa-chevron-right" ng-click="offsetDate(1)"></i>
     </div>
 
-    <md-switch flex="40" aria-label="Day type" ng-model="dayType.workout">
-        {{dayType.text}}
+    <md-switch flex="40" aria-label="Day type"
+               ng-model="dayType"
+               ng-true-value="'workout'"
+               ng-false-value="'rest'">
+        {{dayTypeText[dayType]}}
     </md-switch>
 </md-toolbar>
 <md-autocomplete
@@ -23,51 +26,95 @@
         {{food.name}}
     </span>
 </md-autocomplete>
-<md-list id="eaten-list"
-         class="md-whiteframe-z1 md-default-theme"
-         ng-show="eaten.length">
-    <md-item ng-repeat="food in eaten">
-        <md-item-content>
-            <div class="md-tile-content" layout="row" layout-align="start center">
-                <div flex="50">{{food.name}}</div>
+<md-content class="md-whiteframe-z1">
+    <md-list id="eaten-list"
+             class="md-whiteframe-z1 md-default-theme"
+             ng-show="eaten.length">
+        <md-item ng-repeat="food in eaten">
+            <md-item-content>
+                <div class="md-tile-content" layout="row" layout-align="start center">
+                    <div flex="40">{{food.name}}</div>
 
-                <div layout="row">
-                    <md-input-container>
-                        <input class="weight"
-                               type="number" min="0" step="1"
-                               onfocus="this.select()"
-                               ng-model="food._weight"
-                               ng-change="updateFood(food, 'calcUnits')">
-                        <label>g</label>
-                    </md-input-container>
-                    <md-input-container ng-show="food.unit">
-                        <input class="units"
-                               type="number" min="0" step="1"
-                               onfocus="this.select()"
-                               ng-model="food._units"
-                               ng-change="updateFood(food, 'calcWeight')">
-                        <label>{{food.unit}}</label>
-                    </md-input-container>
+                    <div layout="row" flex="20">
+                        <md-input-container>
+                            <input class="weight"
+                                   type="number" min="0" step="1"
+                                   onfocus="this.select()"
+                                   ng-model="food._weight"
+                                   ng-change="updateFood(food, 'calcUnits')">
+                            <label>g</label>
+                        </md-input-container>
+                        <md-input-container ng-show="food.unit">
+                            <input class="units"
+                                   type="number" min="0" step="1"
+                                   onfocus="this.select()"
+                                   ng-model="food._units"
+                                   ng-change="updateFood(food, 'calcWeight')">
+                            <label>{{food.unit}}</label>
+                        </md-input-container>
+                    </div>
+                    <div flex="35">
+                        <span>
+                            <strong>B:</strong> {{food._weight_proteins | round}}
+                        </span>
+                        <span>
+                            <strong>W:</strong> {{food._weight_carbs | round}}
+                        </span>
+                        <span>
+                            <strong>T:</strong> {{food._weight_fat | round}}
+                        </span>
+                        <span>
+                            <strong>kcal:</strong> {{food._weight_kcal | round}}
+                        </span>
+                    </div>
                 </div>
-                <div flex="30">
-                    <span>
-                        <strong>B:</strong> {{food._weight_proteins | round}}
-                    </span>
-                    <span>
-                        <strong>W:</strong> {{food._weight_carbs | round}}
-                    </span>
-                    <span>
-                        <strong>T:</strong> {{food._weight_fat | round}}
-                    </span>
-                    <span>
-                        <strong>kcal:</strong> {{food._weight_kcal | round}}
-                    </span>
-                </div>
-            </div>
-        </md-item-content>
-        <md-divider ng-if="!$last"></md-divider>
-    </md-item>
-</md-list>
-<!--<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">-->
-    <!--<span>.md-whiteframe-z1</span>-->
-<!--</md-whiteframe>-->
+                <i flex="5" class="fa fa-times"
+                   ng-click="deleteEaten($index)"
+                   style="cursor: pointer;"></i>
+            </md-item-content>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-item>
+    </md-list>
+</md-content>
+<md-toolbar class="sum">
+    <table>
+        <thead>
+        <th></th>
+        <th>Białko</th>
+        <th>Węgle</th>
+        <th>Tłuszcz</th>
+        <th>Kcal</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Suma</td>
+            <td>{{eatenSums.proteins | round}} g</td>
+            <td>{{eatenSums.carbs | round}} g</td>
+            <td>{{eatenSums.fat | round}} g</td>
+            <td>{{eatenSums.kcal | round}}</td>
+        </tr>
+        <tr>
+            <td>Wymagane</td>
+            <td>{{requirements[dayType].proteins | round}} g</td>
+            <td>{{requirements[dayType].carbs | round}} g</td>
+            <td>{{requirements[dayType].fat | round}} g</td>
+            <td>{{requirements[dayType].kcal | round}}</td>
+        </tr>
+        <tr style="font-weight: bold">
+            <td>Brakuje</td>
+            <td>{{-(eatenSums.proteins -
+                requirements[dayType].proteins) | round}} g
+            </td>
+            <td>{{-(eatenSums.carbs - requirements[dayType].carbs)
+                | round}} g
+            </td>
+            <td>{{-(eatenSums.fat - requirements[dayType].fat) |
+                round}} g
+            </td>
+            <td>{{-(eatenSums.kcal - requirements[dayType].kcal) |
+                round}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</md-toolbar>

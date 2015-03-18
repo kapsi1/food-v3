@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="../jspm_packages/system.js"></script>
     <script src="../config.js"></script>
     <script>
@@ -17,9 +18,9 @@
                     md-swipe-right="previousTab()"></ng-include>
     </md-tab>
     <md-tab label="Produkty">
-        <md-content class="md-whiteframe-z1 md-default-theme" md-swipe-left="nextTab()" md-swipe-right="previousTab()">
+        <md-content class="md-default-theme md-whiteframe-z1" md-swipe-left="nextTab()" md-swipe-right="previousTab()">
             <md-list>
-                <md-item ng-repeat="food in foods">
+                <md-item ng-repeat="food in foods" ng-click="addEaten(food)">
                     <md-item-content>
                         <div class="md-tile-content" layout="row" layout-align="start center">
                             <div flex="50" flex-sm="50">{{food.name}}</div>
@@ -50,47 +51,48 @@
         </md-content>
     </md-tab>
     <md-tab label="Nowy">
-        <form name="form" layout="column" ng-submit="save();" md-swipe-left="nextTab()" md-swipe-right="previousTab()">
-            <md-content>
-                <md-input-container>
-                    <label>Nazwa</label>
-                    <input ng-model="newFood.name" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Białko</label>
-                    <input type="number"
-                           ng-model="newFood.proteins" min="0" step="any"
-                           ng-change="newFood.calcKcal()" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Węglowodany</label>
-                    <input type="number"
-                           ng-model="newFood.carbs" min="0" step="any"
-                           ng-change="newFood.calcKcal()" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Tłuszcz</label>
-                    <input type="number"
-                           ng-model="newFood.fat" min="0" step="any"
-                           ng-change="newFood.calcKcal()" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Kalorie</label>
-                    <input type="number" min="0" step="any"
-                           ng-model="newFood.kcal" required>
-                </md-input-container>
-                <md-switch ng-model="hasUnits">
-                    Jednostki
-                </md-switch>
-                <md-input-container ng-show="hasUnits">
-                    <label>Jednostka</label>
-                    <input ng-model="newFood.unit">
-                </md-input-container>
-                <md-input-container ng-show="hasUnits">
-                    <label>Waga jednostki</label>
-                    <input ng-model="newFood.unitWeight">
-                </md-input-container>
-            </md-content>
+        <form name="form"
+              layout="column" layout-margin layout-padding
+              ng-submit="save();"
+              md-swipe-left="nextTab()" md-swipe-right="previousTab()">
+            <md-input-container>
+                <label>Nazwa</label>
+                <input ng-model="newFood.name" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Białko</label>
+                <input type="number"
+                       ng-model="newFood.proteins" min="0" step="any"
+                       ng-change="newFood.calcKcal()" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Węglowodany</label>
+                <input type="number"
+                       ng-model="newFood.carbs" min="0" step="any"
+                       ng-change="newFood.calcKcal()" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Tłuszcz</label>
+                <input type="number"
+                       ng-model="newFood.fat" min="0" step="any"
+                       ng-change="newFood.calcKcal()" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Kalorie</label>
+                <input type="number" min="0" step="any"
+                       ng-model="newFood.kcal" required>
+            </md-input-container>
+            <md-switch ng-model="hasUnits">
+                Jednostki
+            </md-switch>
+            <md-input-container ng-show="hasUnits">
+                <label>Jednostka</label>
+                <input ng-model="newFood.unit">
+            </md-input-container>
+            <md-input-container ng-show="hasUnits">
+                <label>Waga jednostki</label>
+                <input ng-model="newFood.unitWeight">
+            </md-input-container>
             <md-button class="md-primary md-raised"
                        type="submit"
                        ng-click="form.submit()"

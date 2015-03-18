@@ -8,6 +8,7 @@ export default function MenuCtrl($scope, $http, focus, dateFilter) {
     $scope.searchFood = {};
     $scope.date = new Date();
     $scope.eaten = [];
+    $scope.dayTypeText = {workout: 'Trening', rest: 'Odpoczynek'};
 
     $scope.updateSums = function () {
         $scope.eatenSums = {
@@ -29,15 +30,17 @@ export default function MenuCtrl($scope, $http, focus, dateFilter) {
     };
 
     $scope.addEaten = food => {
-        console.log('addEaten', food);
         $scope.eaten.push(new Food(food));
         $scope.searchFood = $scope.searchText = null;
         $scope.saveEaten();
-        //focus($('input.weight').last());
+    };
+
+    $scope.deleteEaten = index => {
+        $scope.eaten.splice(index, 1);
+        $scope.saveEaten();
     };
 
     $scope.$watch('searchFood.food', searchFood => {
-            console.log('searchFood', searchFood);
             if (searchFood) {
                 $scope.addEaten(searchFood);
             }
@@ -54,33 +57,24 @@ export default function MenuCtrl($scope, $http, focus, dateFilter) {
                 }
             })
         };
-        $http.post('/api/eaten', data).then(res => console.log(res));
+        $http.post('/api/eaten', data).then(res => {
+            if(res.status !== 200) alert(res.statusText);
+        });
+        $scope.updateSums();
     };
 
-    $scope.$watch('dayType.workout', function (val) {
-        $scope.dayType.text = val ? 'Trening' : 'Odpoczynek';
-    });
-
-    //$scope.$watch(angular.bind(this, ctrl=>ctrl.ctrl.dayType.workout), workout => {
-    //        console.log('workout', workout);
-    //        $scope.dayType.text = workout ? 'Trening' : 'Odpoczynek';
-    //    }
-    //);
 
     $scope.offsetDate = function (days) {
         $scope.date.setDate($scope.date.getDate() + days);
     };
 
-    $scope.requirements = new Requirements(76, 11.66);
+    $scope.requirements = new Requirements(75.2, 12); //TODO
 
     var day = new Date().getDate();
-    $scope.dayType = {};
-    if ([3, 5, 6, 8, 10, 11, 13, 14].indexOf(day) !== -1) {
-        $scope.dayType.workout = true;
-        $scope.dayType.text = 'Trening';
+    if ([18, 20, 21].indexOf(day) !== -1) { //TODO
+        $scope.dayType = 'workout';
     } else {
-        $scope.dayType.workout = false;
-        $scope.dayType.text = 'Odpoczynek';
+        $scope.dayType = 'rest';
     }
 
     $http.get('/api/eaten/' + dateFilter($scope.date, 'dd.MM.yyyy')).success(data => {
