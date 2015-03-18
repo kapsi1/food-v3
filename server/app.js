@@ -1,3 +1,5 @@
+var env = process.env.NODE_ENV || 'development';
+
 var fs = require('fs');
 var express = require('express');
 var compression = require('compression');

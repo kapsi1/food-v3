@@ -10,6 +10,7 @@ import filters from 'client/filters';
 
 import 'client/app.less!';
 import 'client/menu/menu.less!';
+//TODO
 
 angular.module('foodDiaryApp', [
     'ngMaterial',

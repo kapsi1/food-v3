@@ -15,9 +15,5 @@ foodRouter.delete('/:id', foodController.destroy);
 module.exports = function (app) {
     app.use('/api/foods', foodRouter);
     app.use('/api/eaten', eatenRouter);
-    //app.route('/')
-    //    .get(function (req, res) {
-    //        res.sendfile('./client/index.html');
-    //    });
     app.use(express.static('.'));
 };
