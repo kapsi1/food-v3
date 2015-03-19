@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 var port = process.env.PORT || 3000;
-var db = 'mongodb://localhost/fooddiary-dev';
+var db = process.env.MONGOHQ_URL || 'mongodb://localhost/fooddiary-dev';
 
 app.use(compression());
 app.use(bodyParser.json());
