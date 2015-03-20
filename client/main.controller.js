@@ -2,10 +2,9 @@
 import Food from './Food';
 import Requirements from './Requirements';
 
-export default function MainCtrl($scope, $http) {
+export default function MainCtrl($scope, $http, $mdToast) {
     $http.get('/api/foods').success(function (foods) {
         $scope.foods = foods;
-        //if (foods.length) $scope.addEaten(foods[0]);
     });
 
     $scope.nextTab = function () {
@@ -16,5 +15,17 @@ export default function MainCtrl($scope, $http) {
     };
     $scope.deleteFood = function (food) {
         $http.delete('/api/foods/' + food._id);
+        $scope.foods.splice($scope.foods.indexOf(food), 1);
+    };
+    $scope.saveNewFood = function (newFood) {
+        $http.post('/api/foods', newFood).then(function (res) {
+            $scope.foods.push(newFood);
+            if (res.status === 201) {
+                $mdToast.showSimple('Saved ' + newFood.name);
+            } else {
+                $mdToast.showSimple('Error: ' + res.data);
+            }
+            $scope.newFood = null;
+        });
     };
 }

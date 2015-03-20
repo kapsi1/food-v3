@@ -6,7 +6,7 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var app = express();
 var config = require('./config');
-
+console.log('config', config);
 app.use(compression());
 app.use(bodyParser.json());
 require('./routes')(app);
