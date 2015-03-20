@@ -1,0 +1,10 @@
+{
+  "name": "distros-less",
+  "version": "2.3.1",
+  "description": "minimal distribution files needed to run less in the browser",
+  "main": "less.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:distros/less.git"
+  }
+}
