@@ -8,10 +8,6 @@ import MenuCtrl from 'menu/menu.controller';
 import services from 'services';
 import filters from 'filters';
 
-//import 'client/app.less!';
-//import 'client/menu/menu.less!';
-//TODO
-
 angular.module('foodDiaryApp', [
     'ngMaterial',
     services.name,
