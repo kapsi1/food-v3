@@ -16,15 +16,16 @@ gulp.task('watch', function () {
     gulp.watch('./client/**/*.less', ['less']);
 });
 
-gulp.task('clean', function () {
-    del('dist');
+gulp.task('clean', function (cb) {
+    del('./dist', cb);
 });
 
-gulp.task('build:babel', ['clean'], function () {
-    return gulp.src('./client/**/*.js')
-        .pipe(babel())
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('./dist/client'));
+var jspm = require('jspm');
+gulp.task('build:jspm', ['clean', 'build:copy:html'], function () {
+    jspm.setPackagePath('.');
+    jspm.bundleSFX('main', 'dist/client/build.js', {mangle: false}).then(function () {
+        console.log('jspm finished');
+    });
 });
 gulp.task('build:less', ['clean'], function () {
     return gulp.src('./client/**/*.less')
@@ -34,10 +35,10 @@ gulp.task('build:less', ['clean'], function () {
 
 });
 gulp.task('build:copy:server', ['clean'], function () {
-    return gulp.src(['server/**/*']).pipe(gulp.dest('dist/server'));
+    return gulp.src(['./server/**/*']).pipe(gulp.dest('./dist/server'));
 });
 gulp.task('build:copy:html', ['clean'], function () {
     return gulp.src(['./client/**/*.html']).pipe(gulp.dest('./dist/client'));
 });
 
-gulp.task('build', ['build:babel', 'build:less', 'build:copy:server', 'build:copy:html']);
+gulp.task('build', ['clean', 'less', 'build:jspm', 'build:less', 'build:copy:server', 'build:copy:html']);

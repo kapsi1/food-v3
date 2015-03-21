@@ -27,6 +27,7 @@
   "private": true,
   "jspm": {
     "directories": {
+      "baseURL": "client",
       "lib": ".",
       "packages": "jspm_packages"
     },

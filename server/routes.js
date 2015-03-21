@@ -13,9 +13,9 @@ foodRouter.patch('/:id', foodController.update);
 foodRouter.delete('/:id', foodController.destroy);
 
 module.exports = function (app) {
-    app.use(express.static('client'));
-    app.use('/jspm_packages', express.static('jspm_packages'));
-    app.use('/config.js', express.static('config.js'));
+    app.use(express.static('../client'));
+    app.use('/jspm_packages', express.static('../jspm_packages'));
+    //app.use('/config.js', express.static('../config.js'));
     app.use('/api/foods', foodRouter);
     app.use('/api/eaten', eatenRouter);
 };
