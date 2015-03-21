@@ -3,7 +3,7 @@
 import Food from '../Food';
 import Requirements from '../Requirements';
 
-export default function MenuCtrl($scope, $http, dateFilter) {
+export default /*@ngInject*/ function MenuCtrl($scope, $http, dateFilter) {
     $scope.searchFood = {};
     $scope.date = new Date();
     $scope.eaten = [];

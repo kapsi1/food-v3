@@ -2,7 +2,7 @@
 import Food from './Food';
 import Requirements from './Requirements';
 
-export default function MainCtrl($scope, $http, $mdToast) {
+export default /*@ngInject*/ function MainCtrl($scope, $http, $mdToast) {
     $http.get('/api/foods').success(function (foods) {
         $scope.foods = foods;
     });

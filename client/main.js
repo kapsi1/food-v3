@@ -13,10 +13,10 @@ angular.module('foodDiaryApp', [
     services.name,
     filters.name
 ])
-    .controller(MainCtrl.name, MainCtrl)
-    .controller(MenuCtrl.name, MenuCtrl);
+    .controller('MainCtrl', MainCtrl)
+    .controller('MenuCtrl', MenuCtrl);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(document, ['foodDiaryApp']);
+    angular.bootstrap(document, ['foodDiaryApp'], {strictDi: true});
     document.querySelector('body').style.display = 'block';
 });

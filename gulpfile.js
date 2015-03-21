@@ -50,7 +50,7 @@ gulp.task('build:copy:jspm', ['clean'], function () {
 gulp.task('build', ['clean', 'less', 'build:jspm', 'build:less', 'build:copy:server', 'build:copy:html', 'build:copy:jspm'], function(){
     gulp.src('dist/client/build.js')
     .pipe(ngAnnotate())
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('dist/client'));
 });
 
