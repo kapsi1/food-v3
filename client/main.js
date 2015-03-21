@@ -3,13 +3,13 @@ import 'angular-material';
 import 'lib/angular-locale_pl-pl'
 import 'font-awesome/css/font-awesome.min.css!';
 
-import MainCtrl from 'client/main.controller';
-import MenuCtrl from 'client/menu/menu.controller';
-import services from 'client/services';
-import filters from 'client/filters';
+import MainCtrl from 'main.controller';
+import MenuCtrl from 'menu/menu.controller';
+import services from 'services';
+import filters from 'filters';
 
-import 'client/app.less!';
-import 'client/menu/menu.less!';
+//import 'client/app.less!';
+//import 'client/menu/menu.less!';
 //TODO
 
 angular.module('foodDiaryApp', [

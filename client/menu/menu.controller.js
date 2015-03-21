@@ -2,9 +2,8 @@
 
 import Food from '../Food';
 import Requirements from '../Requirements';
-import 'client/services';
 
-export default function MenuCtrl($scope, $http, focus, dateFilter) {
+export default function MenuCtrl($scope, $http, dateFilter) {
     $scope.searchFood = {};
     $scope.date = new Date();
     $scope.eaten = [];

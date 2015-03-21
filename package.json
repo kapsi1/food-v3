@@ -10,7 +10,13 @@
     "body-parser": "latest"
   },
   "devDependencies": {
-    "connect-livereload": ">=0.4.0"
+    "connect-livereload": ">=0.4.0",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-develop-server": "^0.4.1",
+    "gulp-less": "^3.0.2",
+    "gulp-livereload": "^3.8.0"
   },
   "engines": {
     "node": ">=0.10.0"
