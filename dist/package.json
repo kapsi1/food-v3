@@ -1,0 +1,43 @@
+{
+  "name": "food-diary",
+  "version": "3.0.0",
+  "main": "server/app.js",
+  "dependencies": {
+    "express": ">=4.0.0",
+    "compression": "latest",
+    "lodash": ">=2.4.1",
+    "mongoose": ">=3.8.8",
+    "body-parser": "latest"
+  },
+  "devDependencies": {
+    "connect-livereload": ">=0.4.0",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-develop-server": "^0.4.1",
+    "gulp-less": "^3.0.2",
+    "gulp-livereload": "^3.8.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "private": true,
+  "jspm": {
+    "directories": {
+      "baseURL": "client",
+      "lib": ".",
+      "packages": "jspm_packages"
+    },
+    "dependencies": {
+      "aaike/jspm-less-plugin": "github:aaike/jspm-less-plugin@^0.0.5",
+      "angular": "github:angular/bower-angular@^1.3.14",
+      "angular-material": "github:angular/bower-material@^0.8.3",
+      "css": "github:systemjs/plugin-css@^0.1.6",
+      "font-awesome": "npm:font-awesome@^4.3.0",
+      "less": "github:aaike/jspm-less-plugin@^0.0.5"
+    }
+  }
+}

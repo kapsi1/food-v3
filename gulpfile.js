@@ -47,7 +47,10 @@ gulp.task('build:copy:html', ['clean'], function () {
 gulp.task('build:copy:jspm', ['clean'], function () {
     return gulp.src(['./jspm_packages/**/*']).pipe(gulp.dest('./dist/jspm_packages'));
 });
-gulp.task('build', ['clean', 'less', 'build:jspm', 'build:less', 'build:copy:server', 'build:copy:html', 'build:copy:jspm'], function(){
+gulp.task('build:copy:package', ['clean'], function () {
+    return gulp.src(['./package.json']).pipe(gulp.dest('./dist'));
+});
+gulp.task('build', ['clean', 'less', 'build:jspm', 'build:less', 'build:copy:server', 'build:copy:html', 'build:copy:jspm', 'build:copy:package'], function(){
     gulp.src('dist/client/build.js')
     .pipe(ngAnnotate())
     .pipe(uglify())
