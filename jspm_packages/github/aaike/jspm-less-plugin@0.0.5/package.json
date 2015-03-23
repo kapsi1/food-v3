@@ -1,7 +1,0 @@
-{
-  "main": "less",
-  "registry": "jspm",
-  "dependencies": {
-    "less.js": "^2.3.1"
-  }
-}

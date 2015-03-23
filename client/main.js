@@ -17,6 +17,6 @@ angular.module('foodDiaryApp', [
     .controller('MenuCtrl', MenuCtrl);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(document, ['foodDiaryApp'], {strictDi: true});
+    angular.bootstrap(document, ['foodDiaryApp']);
     document.querySelector('body').style.display = 'block';
 });

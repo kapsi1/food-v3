@@ -2,17 +2,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <link rel="stylesheet" href="app.css">
 
-    <!--<script src="/jspm_packages/system.js"></script>-->
-    <!--<script src="/config.js"></script>-->
-    <!--<script>-->
-        <!--System.import('./main');-->
-<!--//    </script>-->
+    <!--removeIf(production)-->
+    <script src="/jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+        System.import('./main');
+    </script>
+    <!--endRemoveIf(production)-->
 
-    <link rel="stylesheet" href="build.css">
-    <script src="build.js"></script>
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- inject:js -->
+    <!-- endinject -->
 </head>
 <body ng-controller="MainCtrl" style="display: none;">
 <md-tabs md-selected="selectedTab">
