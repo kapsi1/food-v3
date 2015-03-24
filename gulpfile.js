@@ -59,7 +59,7 @@ gulp.task('build:copy', ['clean'], function () {
             .pipe(removeCode({production: true}))
             .pipe(gulp.dest('./dist/client')),
         gulp.src(['./server/**/*']).pipe(gulp.dest('./dist/server')),
-        gulp.src(['./jspm_packages/**/*']).pipe(gulp.dest('./dist/jspm_packages')),
+        gulp.src(['./jspm_packages/**/*.woff2']).pipe(gulp.dest('./dist/jspm_packages')),
         gulp.src(['package.json']).pipe(gulp.dest('./dist')),
         gulp.src(['service-worker2.js']).pipe(gulp.dest('./dist/client'))
     )
