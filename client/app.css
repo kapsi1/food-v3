@@ -1,0 +1,31 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+@media (max-width: 600px) {
+  #menu md-toolbar {
+    font-size: 12px;
+  }
+}
+#menu #eaten-list input.weight {
+  width: 50px;
+}
+#menu #eaten-list input.units {
+  width: 45px;
+}
+#menu #eaten-list md-input-container {
+  padding-bottom: 0;
+}
+#menu md-toolbar #header-date .fa {
+  cursor: pointer;
+  padding: 0 10px;
+  line-height: 64px;
+}
+#menu md-toolbar #header-date #date {
+  width: 22vw;
+}
+#menu .sum table td,
+#menu .sum table th {
+  padding-left: 20px;
+}
+#menu .sum table td:first-of-type {
+  padding-left: inherit;
+}
